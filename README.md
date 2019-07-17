@@ -1,2 +1,0 @@
-# sesam-front
-Sesam Front
