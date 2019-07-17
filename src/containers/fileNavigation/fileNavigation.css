@@ -1,0 +1,14 @@
+.myMenuItem.active {
+  color: white !important;
+  background-color: #3c4586 !important;
+}
+
+.myMenuItem {
+  color: white !important;
+  background-color: grey !important;
+  border-color: white !important;
+}
+
+i.icon {
+  margin-right: 0 !important;
+}

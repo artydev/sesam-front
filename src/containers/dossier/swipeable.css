@@ -1,0 +1,12 @@
+.react-swipeable-view-container {
+  height: 100%;
+}
+.container {
+  margin: 0 !important;
+}
+
+@media (max-width: 700px) {
+  .responsivecontainer {
+    padding: 0 !important;
+  }
+}
