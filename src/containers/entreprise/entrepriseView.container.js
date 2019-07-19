@@ -27,42 +27,50 @@ function mapDispatchToProps(dispatch) {
 }
 
 class EntrepriseViewComponent extends React.Component {
-
   constructor(props) {
     super(props);
     this.state = {
       visites: []
-    }
+    };
   }
 
   componentDidMount() {
     this.props.changeBackUrl('/etablissements');
     this.setState({ isLoading: true });
-    axios.get(config.backend.base_url + '/entreprise/' + this.props.match.params.id)
+    axios
+      .get(
+        config.backend.base_url + '/entreprise/' + this.props.match.params.id
+      )
       .then(({ data }) => {
         this.setState(data);
-        this.props.changeNameOfPage('Établissement ' + data.ETOB_ENSEIGNE_LIB);
+        this.props.changeNameOfPage(
+          'Établissement ' + data.ETOB_RAISON_SOCIALE
+        );
         this.props.changeActivePage('/etablissement/' + data.ETOB_IDENT);
         this.setState({ isLoading: false });
-      })
+      });
   }
   componentDidUpdate(prevprops) {
     if (prevprops.match.params.id != this.props.match.params.id) {
       this.setState({ isLoading: true });
 
-      axios.get(config.backend.base_url + '/entreprise/' + this.props.match.params.id)
+      axios
+        .get(
+          config.backend.base_url + '/entreprise/' + this.props.match.params.id
+        )
         .then(({ data }) => {
           this.setState(data);
-          this.props.changeNameOfPage('Établissement ' + data.ETOB_ENSEIGNE_LIB);
+          this.props.changeNameOfPage(
+            'Établissement ' + data.ETOB_ENSEIGNE_LIB
+          );
           this.props.changeActivePage('/etablissement/' + data.ETOB_IDENT);
           this.setState({ isLoading: false });
-        })
+        });
     }
   }
 
   render() {
-    if (this.state.isLoading)
-      return <MyActivityIndicator />
+    if (this.state.isLoading) return <MyActivityIndicator />;
     return (
       <Container style={{ padding: '1rem' }}>
         <Card centered raised fluid>
@@ -98,8 +106,16 @@ class EntrepriseViewComponent extends React.Component {
                 value={
                   <span>
                     {this.state.ETOB_ADR1} <br />
-                    {this.state.ETOB_ADR2 && <span>{this.state.ETOB_ADR2} <br /></span>}
-                    {this.state.ETOB_ADR3 && <span>{this.state.ETOB_ADR3} <br /></span>}
+                    {this.state.ETOB_ADR2 && (
+                      <span>
+                        {this.state.ETOB_ADR2} <br />
+                      </span>
+                    )}
+                    {this.state.ETOB_ADR3 && (
+                      <span>
+                        {this.state.ETOB_ADR3} <br />
+                      </span>
+                    )}
                     {this.state.ETOB_ADRCP}
                     <span> </span>
                     {this.state.ETOB_ADRVILLE}
@@ -115,7 +131,9 @@ class EntrepriseViewComponent extends React.Component {
           </Card.Content>
           <Card.Content>
             <Grid>
-              {this.state.visites.map(visite => <VisiteComponent key={visite.VISITE_IDENT} visite={visite} />)}
+              {this.state.visites.map(visite => (
+                <VisiteComponent key={visite.VISITE_IDENT} visite={visite} />
+              ))}
             </Grid>
           </Card.Content>
         </Card>

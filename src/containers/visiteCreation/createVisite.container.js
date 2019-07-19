@@ -11,6 +11,8 @@ import {
   Container,
   Checkbox
 } from 'semantic-ui-react';
+import axios from 'axios';
+import config from '../../config';
 import { DateInput } from 'semantic-ui-calendar-react';
 import { PropTypes } from 'prop-types';
 import {
@@ -49,6 +51,7 @@ class CreateVisiteComponent extends React.Component {
       VIS_DATE: moment().format('DD-MM-YYYY'),
       ETOB_RAISON_SOCIALE: '',
       ETOB_SIRET: '',
+      ETOB_IDENT: -1,
       VIS_OBSERVATIONS: '',
       trame: '',
       trameList: [{ _id: 0, name: 'Aucune trame' }],
@@ -59,6 +62,7 @@ class CreateVisiteComponent extends React.Component {
       visiteIdent: undefined, //Identifiant de la visite dans le cas de modification
       visite: undefined //Visite dans le cas de modification
     };
+    this.onSubmit = this.onSubmit.bind(this);
   }
 
   async componentDidMount() {
@@ -180,7 +184,7 @@ class CreateVisiteComponent extends React.Component {
       !this.state.trame
     ) {
       this.setState({
-        message: "Veillez renseigner l'ensemble des champs obligatoires"
+        message: "Veillez à renseigner l'ensemble des champs obligatoires"
       });
       return false;
     }
@@ -194,20 +198,39 @@ class CreateVisiteComponent extends React.Component {
     if (this.state.controlesList.length === 0) {
       this.setState({
         message:
-          'Veuillez rentrer au moins un contrôle. Vous pourrez le modifier par la suite si besoin'
+          'Veuillez rentrer au moins une action de contrôle. Vous pourrez la modifier par la suite si besoin'
       });
       return false;
     }
     return true;
   }
 
-  onSubmit = () => {
+  async onSubmit() {
     if (this.testEntries()) {
+      try {
+        // si connecté à internet, on récupère des informations sur l'établissement
+        const etablissement = await axios.get(
+          config.backend.base_url + '/entreprise/' + this.state.ETOB_IDENT
+        );
+        var etablissementInfos = {
+          ETOB_ADR1: etablissement.data.ETOB_ADR1,
+          ETOB_ADR2: etablissement.data.ETOB_ADR2,
+          ETOB_ADR3: etablissement.data.ETOB_ADR3,
+          ETOB_ADRCP: etablissement.data.ETOB_ADRCP,
+          ETOB_ADRVILLE: etablissement.data.ETOB_ADRVILLE,
+          ETOB_ENSEIGNE_LIB: etablissement.data.ETOB_ENSEIGNE_LIB,
+          ETOB_NOM_RESPONSABLE: etablissement.data.ETOB_NOM_RESPONSABLE
+        };
+      } catch (e) {
+        etablissementInfos = {};
+      }
       if (this.props.match.params.visiteId) {
+        // Si on est dans le cas d'une modification de visite
         visitesService
           .updateVisite(
             {
               ...this.state.visite,
+              ...etablissementInfos,
               ETOB_RAISON_SOCIALE: this.state.ETOB_RAISON_SOCIALE,
               ETOB_SIRET: this.state.ETOB_SIRET,
               VIS_DATE: this.state.VIS_DATE,
@@ -221,12 +244,21 @@ class CreateVisiteComponent extends React.Component {
           )
           .then(() => {
             window.alert('La visite a bien été modifiée.');
-            this.props.history.push('/dossier/' + this.state.DOSSIER_IDENT);
+            this.props.history.push(
+              '/visite/' + this.state.visite.VISITE_IDENT
+            );
           });
       } else {
+        // Si on est dans le cas d'une création de visite
+        const ident = parseInt(
+          // On ajoute un identifiant à la visite
+          Date.now().toString() + this.props.agentIdent.toString()
+        );
         visitesService
           .postControlesByVisite(
             {
+              ...etablissementInfos,
+              VISITE_IDENT: ident,
               ETOB_RAISON_SOCIALE: this.state.ETOB_RAISON_SOCIALE,
               ETOB_SIRET: this.state.ETOB_SIRET,
               VIS_DATE: this.state.VIS_DATE,
@@ -240,13 +272,11 @@ class CreateVisiteComponent extends React.Component {
           )
           .then(() => {
             window.alert('La visite a bien été ajoutée.');
-            this.props.history.push(
-              '/dossier/' + this.props.match.params.dossierId
-            );
+            this.props.history.push('/visite/' + ident);
           });
       }
     }
-  };
+  }
 
   render() {
     return (
@@ -295,6 +325,9 @@ class CreateVisiteComponent extends React.Component {
                   changeSiretValue={ETOB_SIRET => this.setState({ ETOB_SIRET })}
                   changeRaisonSocialeValue={ETOB_RAISON_SOCIALE =>
                     this.setState({ ETOB_RAISON_SOCIALE })
+                  }
+                  changeEtabIdentValue={ETOB_IDENT =>
+                    this.setState({ ETOB_IDENT })
                   }
                 />
                 {this.displayTrame()}

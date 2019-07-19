@@ -3,6 +3,8 @@ import PropTypes from 'prop-types';
 import { Form, Select } from 'semantic-ui-react';
 import { stades } from './stades.data';
 
+// Champs permettant d'ajouter le stade dans l'ajout ou la modification de visite, dans le modal controle
+
 export default class StadeField extends React.Component {
   render() {
     return (

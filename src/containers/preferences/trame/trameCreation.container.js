@@ -87,7 +87,6 @@ class TrameCreationComponent extends React.Component {
               }
         );
         this.props.history.push('/preferences');
-        console.log('trame saved!');
       } catch (e) {
         console.log(e);
       }

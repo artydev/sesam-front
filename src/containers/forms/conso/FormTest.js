@@ -34,8 +34,6 @@ export default class FormTest extends Component {
   render() {
     const date = moment('16-07-2019 11:51', 'DD-MM-YYYY hh:mm');
 
-    console.log(date.format('LT'));
-
     return (
       <div>
         <title />

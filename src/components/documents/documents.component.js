@@ -2,25 +2,19 @@ import React, { Component } from 'react';
 import {
   Button,
   Icon,
-  Header,
-  Modal,
-  Input,
   Responsive
 } from 'semantic-ui-react';
 import MyActivityIndicator from '../../components/myActivityIndicator.component';
-import DocumentModal from './documentModal.component';
-
 import './documents.css';
-
 import PropTypes from 'prop-types';
 import DocumentsList from './documentsList';
 import { Tabs, Tab } from '@material-ui/core';
-
 import SwipeableViews from 'react-swipeable-views';
-
 import PouchdbServices from '../../services';
 let visitesService = PouchdbServices.services.visite;
 let documentsService = PouchdbServices.services.documents;
+
+// Documents joints à une visite
 
 // blobs, pour chrome
 
@@ -140,7 +134,6 @@ class Documents extends Component {
           dossier: this.props.dossier ? this.props.dossierid : null,
           categorie: this.state.activeIndex === 0 ? 'support' : 'joint'
         });
-        console.log('File sent!');
         //ne pas oublier de resize l'image si c'est une image...
       } catch (e) {
         console.log('Error while sending file.');
@@ -150,7 +143,6 @@ class Documents extends Component {
 
   render() {
     const { documents } = this.state;
-    console.log(documents);
 
     return (
       <div style={{ display: 'flex', flexDirection: 'column', height: '100%' }}>

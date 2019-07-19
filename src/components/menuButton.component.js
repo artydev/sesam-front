@@ -3,6 +3,8 @@ import PropTypes from 'prop-types';
 import { Button, Icon, Grid } from 'semantic-ui-react';
 import { Link } from 'react-router-dom';
 
+// Bouton du menu
+
 class MenuButtonComponent extends React.Component {
   render() {
     return (

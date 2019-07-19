@@ -50,7 +50,6 @@ class Photo extends Component {
         Buffer.from(dataUri.replace(/^data:image\/png;base64,/, ''), 'base64')
       ).then(img => {
         img.getBase64(Jimp.MIME_JPEG, (err, res) => {
-          // console.log(this.getFileSize(res));
           resolve(res);
         });
       });
@@ -63,7 +62,6 @@ class Photo extends Component {
       ).then(img => {
         const n = img.quality(quality);
         n.getBase64(Jimp.MIME_JPEG, (err, res) => {
-          // console.log(this.getFileSize(res));
           resolve(res);
         });
       });
@@ -81,7 +79,6 @@ class Photo extends Component {
     while (size > 100000) {
       img = await this.reSizeImage(dataUri, quality);
       size = this.getFileSize(img);
-      console.log(size);
       quality = quality - quality / 10;
     }
 
@@ -95,7 +92,6 @@ class Photo extends Component {
         dossier: null,
         categorie: 'photo'
       });
-      console.log('File sent!');
     } catch (e) {
       console.log(e);
     }

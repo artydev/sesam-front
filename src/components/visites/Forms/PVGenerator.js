@@ -221,7 +221,7 @@ export default class PVGenerator extends Component {
             }}
             className="ft14"
           >
-            Page&nbsp;&nbsp; 1 &nbsp;&nbsp;/&nbsp;&nbsp; 2 &nbsp; 
+            Page&nbsp;&nbsp; 1 &nbsp;&nbsp;/&nbsp;&nbsp; 2 &nbsp;
             &nbsp;&nbsp;&nbsp;&nbsp;
           </p>
           <p
@@ -504,8 +504,8 @@ export default class PVGenerator extends Component {
             }}
             className="ft10"
           >
-            entendons&nbsp;M.&nbsp; { this.props.nameResponsible} &nbsp;en&nbsp;sa&nbsp;qualité&nbsp;de&nbsp;
-            &nbsp;
+            entendons&nbsp;M.&nbsp; {this.props.nameResponsible}{' '}
+            &nbsp;en&nbsp;sa&nbsp;qualité&nbsp;de&nbsp; &nbsp;
             {this.props.quality}
           </p>
           <p
@@ -741,7 +741,7 @@ export default class PVGenerator extends Component {
             }}
             className="ft10"
           >
-            Page&nbsp;&nbsp; 2 &nbsp;&nbsp;/&nbsp;&nbsp; 2 &nbsp; 
+            Page&nbsp;&nbsp; 2 &nbsp;&nbsp;/&nbsp;&nbsp; 2 &nbsp;
             &nbsp;&nbsp;&nbsp;&nbsp;
           </p>
           <p
@@ -993,7 +993,7 @@ export default class PVGenerator extends Component {
             className="ft13"
           >
             clos&nbsp;le&nbsp;&nbsp;
-            {this.props.date}
+            {this.props.signatureDate}
           </p>
           <p
             style={{
@@ -1004,7 +1004,7 @@ export default class PVGenerator extends Component {
             }}
             className="ft13"
           >
-            à&nbsp;&nbsp; {this.props.hour}
+            à&nbsp;&nbsp; {this.props.signatureHour}
           </p>
           <p
             style={{

@@ -4,8 +4,8 @@ var url_prefix = 'https://Admin:dtymoney91190@m.dgccrf.rie.gouv.fr/couchdb';
 export default {
   replication_starting_hour: 9, // at 9am every morning the new data is here we have to refetch it
   backend: {
-    //base_url: 'http://localhost:8080'
-    base_url: '/data'
+    base_url: 'http://localhost:8080'
+    //base_url: '/data'
   },
   couchDb: {
     url_dossiers: url_prefix + '/dossiers',

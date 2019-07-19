@@ -38,10 +38,7 @@ class DossierComponent extends React.Component {
       return (
         dossier.DOSSIER_LIBELLE &&
         (dossier.DOSSIER_LIBELLE.toLowerCase().includes(value.toLowerCase()) ||
-          dossier.DOSSIER_OBJ_TRAVAIL.includes(value.toLowerCase()) ||
-          dossier.DOSSIER_IDENT.toString()
-            .toLowerCase()
-            .includes(value.toString().toLowerCase()))
+          dossier.DOSSIER_OBJ_TRAVAIL.includes(value.toLowerCase()))
       );
     });
 

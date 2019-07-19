@@ -199,13 +199,9 @@ class PouchDbVisiteService {
 
   postControlesByVisite(visiteInfos, controlesList) {
     let promises = [];
-    const ident = parseInt(
-      Date.now().toString() + this.AGENT_DD_IDENT.toString()
-    );
     promises.push(
       this.newVisiteDB.post({
         ...visiteInfos,
-        VISITE_IDENT: ident,
         new_visite: true,
         AGENT_DD_IDENT: this.AGENT_DD_IDENT
       })
@@ -215,7 +211,7 @@ class PouchDbVisiteService {
         this.newControleDB.post({
           AGENT_DD_IDENT: this.AGENT_DD_IDENT,
           ...controle,
-          VISITE_IDENT: ident,
+          VISITE_IDENT: visiteInfos.VISITE_IDENT,
           new_visite: true,
           CONTROLE_IDENT:
             controle.DOSSIER_IDENT.toString() + controle.CPF_IDENT.toString(),

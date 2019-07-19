@@ -1,8 +1,6 @@
 import React from 'react';
 import { Modal, Icon } from 'semantic-ui-react';
-
 import './documents.component';
-
 import PropTypes from 'prop-types';
 
 function DocumentModal(props) {

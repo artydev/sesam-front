@@ -135,7 +135,6 @@ export default class DossierComponent extends React.Component {
               style={{
                 borderRadius: 3,
                 borderBottom: '3px solid #c0c1c4',
-
                 margin: 15,
                 boxShadow: '6px 1px 12px 2px #cfcfcf'
               }}

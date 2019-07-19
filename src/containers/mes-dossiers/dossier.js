@@ -62,7 +62,7 @@ class Dossier extends React.Component {
                 <Grid.Column width={6}>
                   <Grid.Row>
                     <Header as="h5" style={{ fontWeight: 'normal' }}>
-                      {this.props.dossier.ACDG_LIBELLE}
+                      {this.props.dossier.ACDG_LIBELLE[0]}
                     </Header>
                   </Grid.Row>
                   <Grid.Row>

@@ -13,6 +13,7 @@ import PropTypes from 'prop-types';
 import MyDraggable from './draggable';
 import FormModal from '../../../components/visites/formModal.component';
 
+
 function getBase64(file) {
   return new Promise((resolve, reject) => {
     const reader = new FileReader();
@@ -29,7 +30,7 @@ class TrameComponent extends Component {
       taskEdited: null,
       taskName: null,
       activeDropdowns: [],
-
+      etob: undefined,
       opened: false
     };
     this.handleChangeName = this.handleChangeName.bind(this);
@@ -38,6 +39,7 @@ class TrameComponent extends Component {
   }
 
   fileInputRef = React.createRef();
+
 
   handleTextChange(e, data, task) {
     this.props.handleTextChange(task, data.value);
@@ -54,7 +56,7 @@ class TrameComponent extends Component {
     this.clickCount++;
     if (this.clickCount === 1) {
       this.singleClickTimer = setTimeout(
-        function() {
+        function () {
           this.clickCount = 0;
         }.bind(this),
         300
@@ -99,11 +101,11 @@ class TrameComponent extends Component {
     const i = this.state.activeDropdowns.indexOf(index);
     i === -1
       ? this.setState({
-          activeDropdowns: [...this.state.activeDropdowns, index]
-        })
+        activeDropdowns: [...this.state.activeDropdowns, index]
+      })
       : this.setState({
-          activeDropdowns: this.state.activeDropdowns.filter(e => e !== index)
-        });
+        activeDropdowns: this.state.activeDropdowns.filter(e => e !== index)
+      });
   }
 
   validateName(task, name) {
@@ -156,7 +158,7 @@ class TrameComponent extends Component {
                     backgroundColor: '#4286f4'
                   }}
                   key={task.title}
-                  // onClick={() => task.documentToFill && this.handleClick(i)}
+                // onClick={() => task.documentToFill && this.handleClick(i)}
                 >
                   <Icon
                     name="times circle"
@@ -207,25 +209,25 @@ class TrameComponent extends Component {
                             {task.title.toUpperCase()}
                           </div>
                         ) : (
-                          <input
-                            disabled={task != this.state.taskEdited}
-                            type="text"
-                            style={{
-                              fontFamily: 'inherit',
-                              background: 'transparent',
-                              border: '0',
-                              outline: 'none',
-                              color: 'white',
-                              width: '100%'
-                            }}
-                            value={
-                              task != this.state.taskEdited
-                                ? task.title.toUpperCase()
-                                : this.state.taskName
-                            }
-                            onChange={this.handleChangeName}
-                          ></input>
-                        )}
+                            <input
+                              disabled={task != this.state.taskEdited}
+                              type="text"
+                              style={{
+                                fontFamily: 'inherit',
+                                background: 'transparent',
+                                border: '0',
+                                outline: 'none',
+                                color: 'white',
+                                width: '100%'
+                              }}
+                              value={
+                                task != this.state.taskEdited
+                                  ? task.title.toUpperCase()
+                                  : this.state.taskName
+                              }
+                              onChange={this.handleChangeName}
+                            ></input>
+                          )}
                       </div>
                       {task != this.state.taskEdited ? (
                         <Icon
@@ -235,15 +237,15 @@ class TrameComponent extends Component {
                           color="white"
                         ></Icon>
                       ) : (
-                        <Icon
-                          style={{ marginLeft: 10, cursor: 'pointer' }}
-                          onClick={() =>
-                            this.validateName(task, this.state.taskName)
-                          }
-                          name="check"
-                          color="white"
-                        ></Icon>
-                      )}
+                          <Icon
+                            style={{ marginLeft: 10, cursor: 'pointer' }}
+                            onClick={() =>
+                              this.validateName(task, this.state.taskName)
+                            }
+                            name="check"
+                            color="white"
+                          ></Icon>
+                        )}
                     </div>
                     <div
                       style={{
@@ -266,12 +268,12 @@ class TrameComponent extends Component {
                           }
                         ></Icon>
                       ) : (
-                        <Icon
-                          name="file"
-                          style={{ cursor: 'pointer', color: 'white' }}
-                          onClick={() => this.props.changeType(task, 'basic')}
-                        ></Icon>
-                      )}
+                            <Icon
+                              name="file"
+                              style={{ cursor: 'pointer', color: 'white' }}
+                              onClick={() => this.props.changeType(task, 'basic')}
+                            ></Icon>
+                          )}
 
                       {task.type === 'text' || task.type === 'document' ? (
                         this.state.activeDropdowns.includes(task.index) ? (
@@ -281,19 +283,19 @@ class TrameComponent extends Component {
                             style={{ color: 'white', cursor: 'pointer' }}
                           ></List.Icon>
                         ) : (
-                          <List.Icon
-                            onClick={() => this.handleClick(task.index)}
-                            name="caret down"
-                            style={{ color: 'white', cursor: 'pointer' }}
-                          ></List.Icon>
-                        )
+                            <List.Icon
+                              onClick={() => this.handleClick(task.index)}
+                              name="caret down"
+                              style={{ color: 'white', cursor: 'pointer' }}
+                            ></List.Icon>
+                          )
                       ) : (
-                        <List.Icon
-                          color="grey"
-                          name="caret down"
-                          style={{ cursor: 'pointer' }}
-                        ></List.Icon>
-                      )}
+                          <List.Icon
+                            color="grey"
+                            name="caret down"
+                            style={{ cursor: 'pointer' }}
+                          ></List.Icon>
+                        )}
                     </div>
                   </div>
                 </List.Item>
@@ -375,11 +377,11 @@ class TrameComponent extends Component {
                                 ></Icon>
                               </Button>
                             ) : (
-                              <img
-                                style={{ maxHeight: 200, maxWidth: '100%' }}
-                                src={task.innerContent.document}
-                              ></img>
-                            )}
+                                  <img
+                                    style={{ maxHeight: 200, maxWidth: '100%' }}
+                                    src={task.innerContent.document}
+                                  ></img>
+                                )}
                           </div>
                           <div style={{ flex: 0.1 }}>
                             <Button
@@ -392,52 +394,52 @@ class TrameComponent extends Component {
                           </div>
                         </div>
                       ) : (
-                        <div
-                          style={{
-                            display: 'flex',
-                            justifyContent: 'center'
-                          }}
-                        >
-                          <Button.Group>
-                            <Button
+                            <div
                               style={{
-                                background: '#3C4586',
-                                color: 'white'
+                                display: 'flex',
+                                justifyContent: 'center'
                               }}
-                              content={
-                                <Responsive minWidth={540}>
-                                  Ajouter un document
+                            >
+                              <Button.Group>
+                                <Button
+                                  style={{
+                                    background: '#3C4586',
+                                    color: 'white'
+                                  }}
+                                  content={
+                                    <Responsive minWidth={540}>
+                                      Ajouter un document
                                 </Responsive>
-                              }
-                              labelPosition="left"
-                              icon="file"
-                              onClick={() => this.fileInputRef.current.click()}
-                            />
-                            <input
-                              ref={this.fileInputRef}
-                              type="file"
-                              hidden
-                              onChange={e => this.fileChange(task, e)}
-                            />
+                                  }
+                                  labelPosition="left"
+                                  icon="file"
+                                  onClick={() => this.fileInputRef.current.click()}
+                                />
+                                <input
+                                  ref={this.fileInputRef}
+                                  type="file"
+                                  hidden
+                                  onChange={e => this.fileChange(task, e)}
+                                />
 
-                            <Button.Or text="ou" />
-                            <Button
-                              style={{
-                                background: 'red',
-                                color: 'white'
-                              }}
-                              onClick={() => this.addForm(task)}
-                              content={
-                                <Responsive minWidth={540}>
-                                  Formulaire à remplir
+                                <Button.Or text="ou" />
+                                <Button
+                                  style={{
+                                    background: 'red',
+                                    color: 'white'
+                                  }}
+                                  onClick={() => this.addForm(task)}
+                                  content={
+                                    <Responsive minWidth={540}>
+                                      Formulaire à remplir
                                 </Responsive>
-                              }
-                              labelPosition="right"
-                              icon="file pdf"
-                            />
-                          </Button.Group>
-                        </div>
-                      )}
+                                  }
+                                  labelPosition="right"
+                                  icon="file pdf"
+                                />
+                              </Button.Group>
+                            </div>
+                          )}
                     </div>
                   )}
                 </List.Item>

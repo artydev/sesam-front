@@ -2,6 +2,7 @@ import PouchDB from 'pouchdb';
 import PouchDBFind from 'pouchdb-find';
 import config from '../../config';
 import replicateFromSQL from '../replicationHandler';
+import moment from 'moment';
 
 PouchDB.plugin(PouchDBFind);
 
@@ -53,6 +54,7 @@ class PouchDbService {
                 table.rows
                     .map(item => item.doc)
                     .filter(item => !(item._id.split('/')[0] == '_design'))
+                    .sort((d1, d2) => d1.DOSSIER_DATE_LIMITE > d2.DOSSIER_DATE_LIMITE ? -1 : 1)
             );
     }
 

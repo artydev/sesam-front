@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-
 import { Digital } from 'react-activity';
 import 'react-activity/dist/react-activity.css';
 

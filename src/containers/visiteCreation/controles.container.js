@@ -10,7 +10,7 @@ export default class ControleComponent extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      countControl: 0,
+      countControl: 1,
       addModalOpen: false,
       addModalErrorMessage: '',
       modifyModalOpen: false,
@@ -64,7 +64,7 @@ export default class ControleComponent extends React.Component {
         controle.ACDG_IDENT
       );
       this.setState({
-        countCountrol: this.state.countControl + 1,
+        countControl: this.state.countControl + 1,
         addModalOpen: false,
         AddModalMessage: ''
       });
@@ -145,17 +145,17 @@ export default class ControleComponent extends React.Component {
   render() {
     return (
       <Container>
-        <p style={{ fontWeight: 'bold' }}>Contrôles :</p>
+        <p style={{ fontWeight: 'bold' }}>Actions de Contrôle :</p>
         <Modal
           trigger={
             <Button onClick={() => this.setState({ addModalOpen: true })}>
-              Ajouter un contrôle
+              Ajouter une action de contrôle
             </Button>
           }
           open={this.state.addModalOpen}
         >
           <Modal.Header>
-            <span>Ajouter un contrôle</span>
+            <span>Ajouter une action de contrôle</span>
             <Button
               floated="right"
               onClick={() => {
@@ -175,7 +175,7 @@ export default class ControleComponent extends React.Component {
         </Modal>
         <Modal open={this.state.modifyModalOpen}>
           <Modal.Header>
-            <span>Modifier un contrôle</span>
+            <span>Modifier une action de contrôle</span>
             <Button
               floated="right"
               onClick={() => {

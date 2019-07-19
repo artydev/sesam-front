@@ -4,6 +4,8 @@ import PropTypes from 'prop-types';
 import PouchDbServices from '../../services';
 let dossierService = PouchDbServices.services.dossier;
 
+// Champs permettant de rentrer un dossier et une tache nationale dans une création ou modification de visite
+
 export default class DossierField extends React.Component {
   constructor(props) {
     super(props);

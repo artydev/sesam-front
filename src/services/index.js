@@ -1,11 +1,10 @@
-import { store } from '../store';
 import DossierService from './subservices/dossier.service';
 import VisiteService from './subservices/visite.service';
 import ActiviteService from './subservices/activite.service';
 import CpfService from './subservices/cpf.service';
 import DocumentsService from './subservices/documents.service';
 
-import TrameService from './trame.service';
+import TrameService from './subservices/trame.service';
 
 class PouchDbServices {
   constructor() {

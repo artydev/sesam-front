@@ -5,6 +5,8 @@ import PouchDbServices from '../../services';
 let activiteService = PouchDbServices.services.activite;
 let cpfService = PouchDbServices.services.cpf;
 
+// Champs permettant de rentrer les codes dans une création ou modification de visite
+
 export default class CodesField extends React.Component {
   constructor(props) {
     super(props);
@@ -15,7 +17,11 @@ export default class CodesField extends React.Component {
   }
   loadActivites(activites) {
     const newActivites = activites
-      .filter(activite => activite.ACDG_ENQUETE_FLAG === 1)
+      .filter(
+        activite =>
+          activite.ACDG_ENQUETE_FLAG === 1 &&
+          !activite.ACDG_CODE_LIB_NIVEAU3.includes('[Obsolet]')
+      )
       .map(activite => {
         return {
           key: activite.ACDG_IDENT,
@@ -26,13 +32,15 @@ export default class CodesField extends React.Component {
     this.setState({ activites: newActivites });
   }
   loadCpf(cpf) {
-    const newcpf = cpf.map(cpf => {
-      return {
-        key: cpf.CPF_IDENT,
-        text: cpf.CPF_CODE_LIBELLE,
-        value: cpf.CPF_IDENT
-      };
-    });
+    const newcpf = cpf
+      .filter(codeCpf => !codeCpf.CPF_CODE_LIBELLE.includes('[Obsolet]'))
+      .map(cpf => {
+        return {
+          key: cpf.CPF_IDENT,
+          text: cpf.CPF_CODE_LIBELLE,
+          value: cpf.CPF_IDENT
+        };
+      });
     this.setState({ cpf: newcpf });
   }
 

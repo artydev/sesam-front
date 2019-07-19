@@ -26,9 +26,7 @@ export default class PDFGenerator extends Component {
     const height = pdf.internal.pageSize.getHeight();
     pdf.addImage(imgData, 'JPEG', 0, 0, width, height);
     pdf.addPage();
-
     pdf.addImage(imgData2, 'JPEG', 0, 0, width, height);
-
     try {
       await documentsService.postDocument({
         document: pdf.output('datauristring'),
@@ -45,7 +43,6 @@ export default class PDFGenerator extends Component {
     }
     this.setState({ isLoading: false });
   }
-
   render() {
     return (
       <>

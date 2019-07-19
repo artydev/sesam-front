@@ -2,6 +2,9 @@ import React from 'react';
 import { Grid, Icon } from 'semantic-ui-react';
 import propTypes from 'prop-types';
 
+// Ligne permettant de renseigner l'attribut d'une entreprises ou d'un controle ou d'une visite
+// Constitué d'un logo, d'un nom de champs, et d'une valeur de champs
+
 class EntrepriseAttribute extends React.Component {
   render() {
     return (

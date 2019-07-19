@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import { Button, Header, Icon, Input } from 'semantic-ui-react';
 import DocumentModal from './documentModal.component';
-
 import PouchdbServices from '../../services';
 let documentsService = PouchdbServices.services.documents;
 
+// Liste des documents au sein de la page documents
 
 function removeExtension(documentname) {
   const split = documentname.split('.');
@@ -33,7 +33,7 @@ export default class documentsList extends Component {
     this.clickCount++;
     if (this.clickCount === 1) {
       this.singleClickTimer = setTimeout(
-        function () {
+        function() {
           this.clickCount = 0;
         }.bind(this),
         300
@@ -72,10 +72,7 @@ export default class documentsList extends Component {
   validateName(document) {
     document.name =
       this.state.documentname + '.' + removeExtension(document.name)[1];
-    documentsService
-      .editName(document)
-      .then(res => console.log('ok'))
-      .catch(e => console.log(e));
+    documentsService.editName(document).catch(e => console.log(e));
   }
 
   getColor(type) {
@@ -130,7 +127,6 @@ export default class documentsList extends Component {
               }}
             >
               <Button
-
                 style={{
                   margin: '1em',
                   marginBottom: '1em',
@@ -145,7 +141,8 @@ export default class documentsList extends Component {
                 color={this.getColor(document.type)[0]}
               >
                 <>
-                  <Button as="a"
+                  <Button
+                    as="a"
                     color={this.getColor(document.type)[0]}
                     style={{ background: 'none' }}
                     icon
@@ -156,26 +153,28 @@ export default class documentsList extends Component {
                     }
                     download={document.name}
                     onClick={() => {
-                      document.type.includes('image') && this.showModal(document);
-                    }}>
+                      document.type.includes('image') &&
+                        this.showModal(document);
+                    }}
+                  >
                     {document.type.includes('image') ? (
                       <img
                         src={document.document}
                         style={{ maxWidth: '8em', maxHeight: '8em' }}
                       ></img>
                     ) : (
-                        <Icon
-                          style={{
-                            display: 'flex',
-                            justifyContent: 'center',
-                            alignItems: 'center',
-                            fontSize: '4em',
-                            margin: 0,
-                            color: this.getColor(document.type)[0]
-                          }}
-                          name={this.getColor(document.type)[1]}
-                        ></Icon>
-                      )}
+                      <Icon
+                        style={{
+                          display: 'flex',
+                          justifyContent: 'center',
+                          alignItems: 'center',
+                          fontSize: '4em',
+                          margin: 0,
+                          color: this.getColor(document.type)[0]
+                        }}
+                        name={this.getColor(document.type)[1]}
+                      ></Icon>
+                    )}
                   </Button>
                   <Icon
                     style={{
@@ -223,20 +222,20 @@ export default class documentsList extends Component {
                     ></Icon>
                   </>
                 ) : (
-                    <div style={{ height: 30 }}>
-                      <Input
-                        style={{ height: 30 }}
-                        value={this.state.documentname}
-                        onChange={this.handleChangeName}
-                      ></Input>
-                      <Icon
-                        onClick={() => this.validateName(document)}
-                        name="check"
-                        color="grey"
-                        style={{ marginLeft: 5, cursor: 'pointer' }}
-                      ></Icon>
-                    </div>
-                  )}
+                  <div style={{ height: 30 }}>
+                    <Input
+                      style={{ height: 30 }}
+                      value={this.state.documentname}
+                      onChange={this.handleChangeName}
+                    ></Input>
+                    <Icon
+                      onClick={() => this.validateName(document)}
+                      name="check"
+                      color="grey"
+                      style={{ marginLeft: 5, cursor: 'pointer' }}
+                    ></Icon>
+                  </div>
+                )}
               </div>
             </div>
           ))}

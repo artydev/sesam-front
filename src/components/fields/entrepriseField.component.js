@@ -6,6 +6,11 @@ import PropTypes from 'prop-types';
 import axios from 'axios';
 import config from '../../config';
 
+// Champs permettant de rentrer l'entreprise et le SIRET dans une création ou modification de visite
+// En ligne, la recherche par raison sociale permet de rentrer automatiquement le SIRET et ajoute
+// lui même le numéro identifiant de l'établissement, ce qui permet d'ajouter par la suite
+// des informations sur l'établissement : l'adresse et le nom du responsable
+
 export default class EntrepriseField extends React.Component {
   constructor(props) {
     super(props);
@@ -22,7 +27,7 @@ export default class EntrepriseField extends React.Component {
       this.setState({
         searchResults: data.map(etab => ({
           key: etab.ETOB_SIRET,
-          value: etab.ETOB_SIRET,
+          value: [etab.ETOB_SIRET, etab.ETOB_IDENT],
           text: etab.ETOB_RAISON_SOCIALE
         }))
       });
@@ -41,7 +46,7 @@ export default class EntrepriseField extends React.Component {
           options={this.state.searchResults.concat([
             {
               key: this.props.ETOB_SIRET,
-              value: this.props.ETOB_SIRET,
+              value: [this.props.ETOB_SIRET, this.props.ETOB_IDENT],
               text: this.props.ETOB_RAISON_SOCIALE
             }
           ])}
@@ -54,11 +59,11 @@ export default class EntrepriseField extends React.Component {
           }}
           onChange={(e, data) => {
             this.props.changeRaisonSocialeValue(e.currentTarget.innerText);
-            this.props.changeSiretValue(data.value);
+            this.props.changeSiretValue(data.value[0]);
+            this.props.changeEtabIdentValue(data.value[1]);
           }}
-          value={this.props.ETOB_SIRET}
+          value={[this.props.ETOB_SIRET, this.props.ETOB_IDENT]}
         />
-
         <Form.Input
           fluid
           required
@@ -75,6 +80,8 @@ export default class EntrepriseField extends React.Component {
 EntrepriseField.propTypes = {
   ETOB_RAISON_SOCIALE: PropTypes.string.isRequired,
   ETOB_SIRET: PropTypes.string.isRequired,
+  ETOB_IDENT: PropTypes.string.isRequired,
   changeSiretValue: PropTypes.func.isRequired,
-  changeRaisonSocialeValue: PropTypes.func.isRequired
+  changeRaisonSocialeValue: PropTypes.func.isRequired,
+  changeEtabIdentValue: PropTypes.func.isRequired
 };
