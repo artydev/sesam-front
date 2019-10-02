@@ -144,8 +144,8 @@ export default class ControleComponent extends React.Component {
   };
   render() {
     return (
-      <Container>
-        <p style={{ fontWeight: 'bold' }}>Actions de Contrôle :</p>
+      <Container>			 
+        <p style={{ fontWeight: 'bold' }} >Actions de Contrôle <span style={{color: 'red'}}>*</span></p>
         <Modal
           trigger={
             <Button onClick={() => this.setState({ addModalOpen: true })}>

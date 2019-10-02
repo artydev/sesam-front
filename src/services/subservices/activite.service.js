@@ -24,6 +24,7 @@ class ActiviteService {
 
   //getAllDocsOfTheDB
   getAllDocs() {
+		
     return this.db
       .allDocs({ include_docs: true, descending: true })
       .then(table =>

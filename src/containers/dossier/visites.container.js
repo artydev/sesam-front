@@ -24,6 +24,7 @@ export default class VisitesComponent extends React.Component {
   }
 
   render() {
+		console.log(this.props.visitesList)
     return this.props.visitesList ? (
       <div>
         <div
@@ -38,13 +39,6 @@ export default class VisitesComponent extends React.Component {
             height: 70
           }}
         >
-          <div style={{ flex: 1, maxWidth: 200 }}>
-            <Search
-              input={{ fluid: true }}
-              open={false}
-              // onSearchChange={_.debounce(this.handleSearchChange, 500)}
-            />
-          </div>
           <div style={{ flex: 2, textAlign: 'right' }}>
             <Link to={'/nouvelle-visite/' + this.props.dossierid}>
               <Button style={{ padding: 5 }} icon basic color="blue">

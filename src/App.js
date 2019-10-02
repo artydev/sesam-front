@@ -9,7 +9,7 @@ import './containers/navbar/navbar.css';
 export class App extends React.Component {
   render() {
     return (
-      <div
+      <div			
         style={{
           height: '100vh',
           backgroundColor: '#f2f2f2',
@@ -17,6 +17,7 @@ export class App extends React.Component {
           flexDirection: 'column'
         }}
       >
+
         <Router>
           <NavBar />
           <div
@@ -26,6 +27,7 @@ export class App extends React.Component {
             <RoutingComponent />
           </div>
         </Router>
+		
       </div>
     );
   }

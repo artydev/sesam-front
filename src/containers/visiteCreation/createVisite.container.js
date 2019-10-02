@@ -54,7 +54,7 @@ class CreateVisiteComponent extends React.Component {
       ETOB_IDENT: -1,
       VIS_OBSERVATIONS: '',
       trame: '',
-      trameList: [{ _id: 0, name: 'Aucune trame' }],
+      trameList: [],
       controlesList: [],
       message: '', //Message d'erreur si il y en a
       DOSSIER_IDENT: -1,
@@ -142,7 +142,8 @@ class CreateVisiteComponent extends React.Component {
               <Grid.Column width={16} style={{ padding: 0 }}>
                 <Form.Select
                   fluid
-                  placeholder="Trame"
+                  placeholder="Sélectionnez une trame"
+									required
                   label="Trame associée"
                   style={{ width: '100%' }}
                   options={this.state.trameList.map(trame => ({
@@ -290,8 +291,9 @@ class CreateVisiteComponent extends React.Component {
                   <Form.Field
                     control={Checkbox}
                     label="CPMM"
-                    onClick={() =>
-                      this.setState({ VIS_CPMM: !this.state.VIS_CPMM })
+                    onClick={() => {
+                      	this.setState({ VIS_CPMM: !this.state.VIS_CPMM })
+											}
                     }
                     checked={this.state.VIS_CPMM}
                   />

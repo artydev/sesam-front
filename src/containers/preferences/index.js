@@ -22,7 +22,10 @@ export default class Preferences extends Component {
     PouchDBServices.services.trame
       .getAllDocs()
       .then(res => {
-        this.setState({ trames: res, isLoading: false });
+				console.log("\n---------------- Init Collect Trames (\\sesam-front-master\\src\\containers\\preferences\\index.js)-----------------------")
+				console.log(res)
+				this.setState({ trames: res, isLoading: false });
+				console.log("------------------ End Collect Trames -----------------------")
       })
       .catch(e => {
         console.log(e);

@@ -15,7 +15,6 @@ function mapPropsToState(state) {
     preferencesLink: state.navbarReducer.activePages.preferences
   };
 }
-
 class NavBarComponent extends React.Component {
   render() {
     return (
@@ -46,7 +45,7 @@ class NavBarComponent extends React.Component {
           <Menu.Item as={Link} to="/menu">
             <Icon name="home" /> Menu
           </Menu.Item>
-          <Menu.Item style={{ flex: '1', verticalAlign: 'middle' }}>
+          <Menu.Item style={{ flex: '1', verticalAlign: 'middle', height:'100%' }}>
             <p style={{ fontSize: '20px' }}>{this.props.nameOfPage}</p>
           </Menu.Item>
           <Menu.Menu position="right">

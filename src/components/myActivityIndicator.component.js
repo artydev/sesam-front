@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Digital } from 'react-activity';
 import 'react-activity/dist/react-activity.css';
 
+
 export default class MyActivityIndicator extends Component {
   render() {
     return (
@@ -18,3 +19,4 @@ export default class MyActivityIndicator extends Component {
     );
   }
 }
+

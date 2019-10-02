@@ -86,14 +86,16 @@ class PouchDbVisiteService {
     this.newVisiteDB.replicate.to(
       config.couchDb.url_new_visites,
       opts_without_filter
-    );
+		);
+	 
     this.newVisiteDB.replicate.from(config.couchDb.url_new_visites, opts);
     this.newVisiteDB.createIndex({
       index: { fields: ['VISITE_IDENT'] }
     });
     this.newVisiteDB
       .changes({ since: 'now', live: true })
-      .on('change', () => this.changesCallbacks.map(cb => cb()));
+			.on('change', () => this.changesCallbacks.map(cb => cb()));
+		this.newVisiteDB.allDocs().then(d => console.log(d))			
   }
 
   //call the callback on db changes
@@ -148,6 +150,7 @@ class PouchDbVisiteService {
   }
 
   async getVisitesByDossier(dossierID) {
+		console.log(`récupération des visites pour le dossier : ${dossierID}`)
     let controles = await this.getControlesByDossier(dossierID);
     let visitesDic = {};
     for (let controle of controles) {
@@ -192,6 +195,7 @@ class PouchDbVisiteService {
   }
 
   getVisiteById(visiteid) {
+		console.log(`getVisiteById(${visiteid})`)
     return this.newVisiteDB
       .find({ selector: { VISITE_IDENT: parseInt(visiteid) } })
       .then(res => res.docs[0]);

@@ -8,6 +8,7 @@ import FileNavigationComponent from '../fileNavigation';
 import Photo from './photo/photo';
 import Documents from './documents/documents.container';
 import { PropTypes } from 'prop-types';
+import m from 'mithril';
 import {
   changeNameOfPage,
   changeBackUrl,
@@ -261,3 +262,4 @@ export default connect(
   mapStateToProps,
   mapDispatchToProps
 )(Visite);
+

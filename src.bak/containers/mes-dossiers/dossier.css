@@ -1,0 +1,33 @@
+.menubutton {
+  border-radius: 0 !important;
+}
+
+@media screen and (min-width: 768px) {
+  .responsivepadding {
+    margin-left: 50px !important;
+    margin-right: 50px !important;
+  }
+}
+
+@media screen and (max-width: 700px) {
+  .responsivemargin {
+    margin-top: 77px;
+  }
+}
+@media screen and (min-width: 700px) {
+  .responsivemargin {
+    margin-top: 58px;
+  }
+}
+
+@media (min-width: 500px) {
+  .marginNavbar {
+    padding-top: 71px !important;
+  }
+}
+
+@media (max-width: 500px) {
+  .marginNavbar {
+    padding-top: 46.84px !important;
+  }
+}

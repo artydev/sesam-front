@@ -54,14 +54,15 @@ class MonDossier extends React.Component {
   };
 
   loadDossier(dossier) {
+	
     this.setState({ dossier: dossier }, () => {
       this.state.dossier &&
         this.props.changeNameOfPage(this.state.dossier.DOSSIER_LIBELLE);
     });
   }
 
-  componentDidMount() {
-    let dossierId = this.props.match.params.id;
+  componentDidMount() {		
+		let dossierId = this.props.match.params.id;
     visiteService
       .getVisitesByDossier(dossierId)
       .then(data => this.setState({ visitesList: data, isLoading: false }));

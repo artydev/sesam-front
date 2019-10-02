@@ -2,7 +2,7 @@ import PouchDB from 'pouchdb';
 import PouchDBFind from 'pouchdb-find';
 import config from '../../config';
 import replicateFromSQL from '../replicationHandler';
-import moment from 'moment';
+
 
 PouchDB.plugin(PouchDBFind);
 
@@ -14,13 +14,14 @@ class PouchDbService {
 
         this.changesCallbacks = [];
 
-        this.initDb(AGENT_DD_IDENT);
+				this.initDb(AGENT_DD_IDENT);
+		
     }
 
     async initDb(AGENT_DD_IDENT) {
+	      console.log("search dosiers...")
         this.db = new PouchDB('mes-dossiers');
         this.replication = replicateFromSQL(this.db, config.backend.base_url + '/fulldata/dossiers?idAgent=' + AGENT_DD_IDENT, 'dossier_date');
-
 
         this.db.createIndex({
             index: { fields: ['DOSSIER_IDENT'] }
@@ -36,9 +37,11 @@ class PouchDbService {
     }
 
     async resetDb(AGENT_DD_IDENT) {
+			console.log("--------------Reset Doccier DB----------------");
         this.replication.stopReplication();
         await this.db.destroy();
-        await this.initDb(AGENT_DD_IDENT);
+				await this.initDb(AGENT_DD_IDENT);
+				
     }
 
     //call the callback on db changes

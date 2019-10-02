@@ -1,5 +1,5 @@
 import React from 'react';
-import { Form, Select } from 'semantic-ui-react';
+import { Form, Select, Input } from 'semantic-ui-react';
 import PropTypes from 'prop-types';
 import PouchDbServices from '../../services';
 let dossierService = PouchDbServices.services.dossier;
@@ -136,41 +136,37 @@ export default class DossierField extends React.Component {
     }
   };
 
+	/* Remplacement de l'élément 'Select' par l'élémént Input */
+	getLibSelectedDossier = (dossierIdent) => {		
+		const listDossier = this.state.optionsDossiers;
+		const selectedDossier = listDossier.filter(dossier => dossier.key == dossierIdent)[0];
+		return (selectedDossier &&  selectedDossier.text) || "veuillez patienter, merci";
+	}
+
+	getTacheProgrammee = () => {
+		if (this.state.taches.length > 0) {
+			const listTache = this.state.taches
+			return listTache[0].text || "veuillez patienter, merci"
+		}
+	}	
+
   render() {
     return (
       <Form.Group widths="equal">
         <Form.Field
           required
-          control={Select}
-          options={[
-            {
-              key: -1,
-              text: 'Rechercher par tâche programmée',
-              value: -1
-            }
-          ].concat(this.state.optionsDossiers)}
+          control={Input}
+        
           label="Dossier"
-          search
-          onChange={(e, data) => (
-            this.props.dossierChange(data.value, e.currentTarget.innerText),
-            this.handleDossierChange(data.value)
-          )}
-          value={this.props.DOSSIER_IDENT}
+         
+					value={this.getLibSelectedDossier(this.props.DOSSIER_IDENT)}
         />
+
         <Form.Field
           required
-          control={Select}
-          options={[
-            { key: 0, text: 'Rechercher par dossier', value: 0 }
-          ].concat(this.state.taches)}
+          control={Input}
           label="Tâche Programmée"
-          placeholder="Tâche Programmée"
-          search
-          onChange={(e, data) => (
-            this.props.tacheChange(data.value, e.currentTarget.innerText),
-            this.handleTacheChange(this.props.DOSSIER_IDENT)
-          )}
-          value={this.props.TAPR_IDENT}
+          value={this.getTacheProgrammee()}
         />
       </Form.Group>
     );
