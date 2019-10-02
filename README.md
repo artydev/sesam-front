@@ -1,4 +1,4 @@
-# Documentation du front SESAM
+# Documentation du front SESAM - SICCRF
 
 ## Architecture de l'application
 
