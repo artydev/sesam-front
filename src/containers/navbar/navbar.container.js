@@ -22,7 +22,7 @@ function setNavBarColor () {
 	const localhost =  hostname.indexOf("localhost") >= 0
 	const mtest = hostname.indexOf("m-test") >= 0
 	return (
-		localhost && (document.title = 'SESAM-localhost') && "#ff0045" ) 
+		localhost && (document.title = 'SESAM-localhost') && "#500045" ) 
 		|| (mtest && (document.title = 'SESAM-TEST') && "#008000")
 }
 
