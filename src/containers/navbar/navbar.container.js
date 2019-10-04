@@ -15,6 +15,17 @@ function mapPropsToState(state) {
     preferencesLink: state.navbarReducer.activePages.preferences
   };
 }
+
+
+function setNavBarColor () {
+	const hostname = "" + window.location.hostname;
+	const localhost =  hostname.indexOf("localhost") >= 0
+	const mtest = hostname.indexOf("m-test") >= 0
+	return (
+		localhost && (document.title = 'SESAM-localhost') && "#ff0045" ) 
+		|| (mtest && (document.title = 'SESAM-TEST') && "#008000")
+}
+
 class NavBarComponent extends React.Component {
   render() {
     return (
@@ -31,7 +42,7 @@ class NavBarComponent extends React.Component {
           as={Responsive}
           minWidth={500}
           fixed="top"
-          style={{ position: 'fixed', backgroundColor: '#3C4586' }}
+          style={{ position: 'fixed', backgroundColor: setNavBarColor() }}
           inverted
           icon="labeled"
         >

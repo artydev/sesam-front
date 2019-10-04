@@ -29,7 +29,6 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
   return {
     changeAgent: async newAgentIdent => {
-			alert(newAgentIdent)
       await PouchDBServices.ChangeAgent(newAgentIdent);
       dispatch(changeAgent(newAgentIdent));
     }
