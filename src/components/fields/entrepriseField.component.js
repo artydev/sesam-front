@@ -23,7 +23,8 @@ export default class EntrepriseField extends React.Component {
     try {
       let { data } = await axios.get(
         config.backend.base_url + '/entreprise/search?query=' + searchText
-      );
+			);
+			console.log(config.backend.base_url + '/entreprise/search?query=' + searchText)
       this.setState({
         searchResults: data.map(etab => ({
           key: etab.ETOB_SIRET,

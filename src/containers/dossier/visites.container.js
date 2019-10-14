@@ -24,7 +24,6 @@ export default class VisitesComponent extends React.Component {
   }
 
   render() {
-		console.log(this.props.visitesList)
     return this.props.visitesList ? (
       <div>
         <div

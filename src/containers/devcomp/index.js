@@ -1,4 +1,7 @@
 // @ts-nocheck
+import PouchDB from 'pouchdb';
+import PouchDBFind from 'pouchdb-find';
+import config from '../../config';
 import React from 'react';
 import m from'mithril'
 import b from 'bss'
@@ -131,16 +134,8 @@ class SesamApp extends HTMLElement {
   }
   connectedCallback() {
 		document.getElementsByClassName("responsiveHeight")[0].style.display = "none"
-		//m.mount(this, App)
-		m.route.prefix = ''
-		m.route(this, "/#/devcomp", {
-		
-			"/#/devcomp": App,
-			"/#/devcomp/test" : {
-
-			}
-		
-		})
+		m.mount(this, App)
+	
   }
 }
 

@@ -12,8 +12,7 @@ class ActiviteService {
       batch_size: 1000,
       live: true,
       retry: true
-    };
-
+    };	
     this.replication = replicateFromSQL(
       this.db,
       config.backend.base_url + '/fulldata/activite/',
@@ -24,7 +23,7 @@ class ActiviteService {
 
   //getAllDocsOfTheDB
   getAllDocs() {
-		
+	
     return this.db
       .allDocs({ include_docs: true, descending: true })
       .then(table =>

@@ -9,7 +9,7 @@ import NewVisitesService from './subservices/newvisites.service'
 
 class PouchDbServices {
   constructor() {
-	
+		window.console.log("\n\n---------------Init Pouch Services (sercices/subservices/index.js)-------\n\n")
 		this.AGENT_DD_IDENT = window.localStorage.getItem('AGENT_DD_IDENT');
     this.services = {
       dossier: new DossierService(this.AGENT_DD_IDENT),
@@ -20,7 +20,7 @@ class PouchDbServices {
 			documents: new DocumentsService(this.AGENT_DD_IDENT),
 			newVisites: new NewVisitesService()
     };
-    this.ChangeAgent = this.ChangeAgent.bind(this);
+		this.ChangeAgent = this.ChangeAgent.bind(this);
   }
 
 	// from auth.container.js

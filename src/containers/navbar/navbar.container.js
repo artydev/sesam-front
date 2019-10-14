@@ -21,9 +21,11 @@ function setNavBarColor () {
 	const hostname = "" + window.location.hostname;
 	const localhost =  hostname.indexOf("localhost") >= 0
 	const mtest = hostname.indexOf("m-test") >= 0
+	const mprod = hostname.indexOf("m.dgccrf") >= 0
 	return (
 		localhost && (document.title = 'SESAM-localhost') && "#500045" ) 
 		|| (mtest && (document.title = 'SESAM-TEST') && "#008000")
+		|| (mprod && (document.title = 'SESAM') && "rgb(60, 69, 134)")
 }
 
 class NavBarComponent extends React.Component {
@@ -76,7 +78,7 @@ class NavBarComponent extends React.Component {
           as={Responsive}
           maxWidth={500}
           fixed="top"
-          style={{ position: 'fixed', backgroundColor: '#3C4586' }}
+          style={{ position: 'fixed', backgroundColor: setNavBarColor() }}
           color="blue"
           inverted
           size="large"

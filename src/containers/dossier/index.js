@@ -62,10 +62,16 @@ class MonDossier extends React.Component {
   }
 
   componentDidMount() {		
+	
 		let dossierId = this.props.match.params.id;
     visiteService
       .getVisitesByDossier(dossierId)
-      .then(data => this.setState({ visitesList: data, isLoading: false }));
+      .then(data =>  {
+				console.log("------------------------ Visites ---------------------")
+				console.log(data)
+				this.setState({ visitesList: data.reverse(), isLoading: false })
+				console.log("-------------------End Data ------------------------------")
+			});
     visiteService.onChanges(() =>
       this.setState({ isLoading: true }, () => {
         visiteService.getVisitesByDossier(dossierId).then(data => {
@@ -120,7 +126,7 @@ class MonDossier extends React.Component {
                   <Tab label="Infos" />
                   {//pas de visites si le dossier n'est pas de type enquête!
                   this.state.dossier.TYPE_DOSSIER_IDENT === 3 && (
-                    <Tab label="Visites" />
+                    <Tab label="Visites"  id="visite"/>
                   )}
                   <Tab label="Documents" />
                 </Tabs>

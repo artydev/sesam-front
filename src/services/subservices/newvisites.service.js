@@ -7,18 +7,17 @@ PouchDB.plugin(PouchDBFind);
 
 class PouchNewVisitesService {
   constructor(AGENT_DD_IDENT) {
-		console.log(AGENT_DD_IDENT)
 		this.initDb = this.initDb.bind(this);
 		this.initDb(AGENT_DD_IDENT);
 	}
 
 	async initDb(AGENT_DD_IDENT) {
 
-		console.log("initDb NewVisites")
+	
 	}
 
 	async resetDb() {
-    console.log("resetDb newVisites")
+ 
   }
 }
 	

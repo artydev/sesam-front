@@ -46,13 +46,11 @@ class AuthComponent extends React.Component {
   }
 
   onSubmit = async () => { 
-
+ 
     try {
       let res = await axios.get(
 				config.backend.base_url + '/agent/' + this.state.idAgent);
-				window.console.clear()
-				window.console.log("Searching user...")
-				window.console.log(res)
+
     
       if (
         window.confirm(

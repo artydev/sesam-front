@@ -143,7 +143,6 @@ class CreateVisiteComponent extends React.Component {
                 <Form.Select
                   fluid
                   placeholder="Sélectionnez une trame"
-									required
                   label="Trame associée"
                   style={{ width: '100%' }}
                   options={this.state.trameList.map(trame => ({
@@ -181,8 +180,7 @@ class CreateVisiteComponent extends React.Component {
   testEntries() {
     if (
       !this.state.ETOB_RAISON_SOCIALE ||
-      !this.state.VIS_DATE ||
-      !this.state.trame
+      !this.state.VIS_DATE 
     ) {
       this.setState({
         message: "Veillez à renseigner l'ensemble des champs obligatoires"

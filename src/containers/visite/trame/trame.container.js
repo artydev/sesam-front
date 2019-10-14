@@ -115,11 +115,22 @@ export default class DossierComponent extends React.Component {
   }
 
   render() {
+		if (!this.props.taskList  ) {
+			this.props.history.push(`${this.props.oldBackUrl}`)	
+			window.setInterval(() => { 
+				try {
+						document.getElementById("visite").click();
+				}
+				catch (e) {
+						window.console.log(e);
+				}
+			}, 500) 
+		}
     return (
       <>
         <FormModal
           {...this.props}
-          opened={this.state.opened}
+          opened={this.state.opened}					
           close={() => this.closeModal()}
         />
         <List
@@ -129,7 +140,7 @@ export default class DossierComponent extends React.Component {
             textAlign: 'left'
           }}
         >
-          {this.props.taskList.map((task, i) => (
+          {this.props.taskList && this.props.taskList.map((task, i) => (
             <div
               key={i}
               style={{

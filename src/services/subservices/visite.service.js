@@ -10,18 +10,19 @@ class PouchDbVisiteService {
     this.resetDb = this.resetDb.bind(this);
     this.initDb = this.initDb.bind(this);
     this.postControlesByVisite = this.postControlesByVisite.bind(this);
-
     this.changesCallbacks = [];
     this.initDb(AGENT_DD_IDENT);
   }
 
   async resetDb(AGENT_DD_IDENT) {
+	
     this.controleReplication.stopReplication();
     this.visiteReplication.stopReplication();
     await this.controleDB.destroy();
     await this.newControleDB.destroy();
     await this.visiteDB.destroy();
-    await this.newVisiteDB.destroy();
+		await this.newVisiteDB.destroy();
+		
     await this.initDb(AGENT_DD_IDENT);
   }
 
@@ -40,6 +41,10 @@ class PouchDbVisiteService {
       live: true,
       retry: true
     };
+
+		//DEBUG
+
+		opts = opts_without_filter
 
     this.controleDB = new PouchDB('controles');
     this.controleReplication = replicateFromSQL(
@@ -65,7 +70,9 @@ class PouchDbVisiteService {
     this.newControleDB
       .changes({ since: 'now', live: true })
       .on('change', () => this.changesCallbacks.map(cb => cb()));
-
+		window.console.log("\n--------------- Recherche des visites dans Iris -------------------")
+		window.console.log(config.backend.base_url + '/fulldata/visites?idAgent=' + AGENT_DD_IDENT)
+		window.console.log("---------------------------------------------------------------------\n\n")
     this.visiteDB = new PouchDB('visites');
     this.visiteReplication = replicateFromSQL(
       this.visiteDB,
@@ -88,14 +95,23 @@ class PouchDbVisiteService {
       opts_without_filter
 		);
 	 
-    this.newVisiteDB.replicate.from(config.couchDb.url_new_visites, opts);
+		this.newVisiteDB.replicate.from(config.couchDb.url_new_visites, opts);
+		console.log(config.couchDb.url_new_visites)
     this.newVisiteDB.createIndex({
       index: { fields: ['VISITE_IDENT'] }
     });
     this.newVisiteDB
       .changes({ since: 'now', live: true })
-			.on('change', () => this.changesCallbacks.map(cb => cb()));
-		this.newVisiteDB.allDocs().then(d => console.log(d))			
+			.on('change', () =>   {
+				
+				this.changesCallbacks.map(cb => cb())
+			});
+		this.newVisiteDB.allDocs().then(d =>  {
+		
+			window.console.log("-------------- Nouvelles Visites -------------------------")
+			console.log(d);
+
+		})			
   }
 
   //call the callback on db changes

@@ -19,7 +19,9 @@ class PouchDbService {
     }
 
     async initDb(AGENT_DD_IDENT) {
-	      console.log("search dosiers...")
+				window.console.log("\n--------------- Recherche des dossiers dans Iris -------------------")
+				window.console.log(config.backend.base_url + '/fulldata/dossiers?idAgent=' + AGENT_DD_IDENT)
+				window.console.log("---------------------------------------------------------------------\n\n")
         this.db = new PouchDB('mes-dossiers');
         this.replication = replicateFromSQL(this.db, config.backend.base_url + '/fulldata/dossiers?idAgent=' + AGENT_DD_IDENT, 'dossier_date');
 
