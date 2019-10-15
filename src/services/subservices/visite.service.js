@@ -42,10 +42,6 @@ class PouchDbVisiteService {
       retry: true
     };
 
-		//DEBUG
-
-		opts = opts_without_filter
-
     this.controleDB = new PouchDB('controles');
     this.controleReplication = replicateFromSQL(
       this.controleDB,
@@ -190,7 +186,11 @@ class PouchDbVisiteService {
         };
       }
     });
-    visitesList = await Promise.all(visitesList);
+		visitesList = await Promise.all(visitesList);
+
+		console.log("--------------------- getVisiteByDossier --------------------------------")
+		console.log(visitesList)
+		console.log("-----------------------------------------------------------------------")
     // eslint-disable-next-line no-undefa
     return visitesList.filter(doc => doc);
   }
