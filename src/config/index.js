@@ -1,6 +1,4 @@
-var url_prefix_mprod = 'https://Admin:dtymoney91190@m.dgccrf.rie.gouv.fr/couchdb';
-var url_prefix_mtest = 'http://admin:admin@m-test.dgccrf.rie.gouv.fr/couchdb';
-var url_prefix_local = 'http://admin:admin@localhost:5984';
+
 
 let url_prefix, base_url;
 function setUrlPrefix () {
